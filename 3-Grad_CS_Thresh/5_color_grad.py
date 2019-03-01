@@ -17,11 +17,11 @@ def hls_select(img, thresh=(0, 255)):
 
     binary_output = np.zeros_like(s)
 
-    binary_output[(s > thresh[0]) & (s <= thresh[1])]
-    
+    binary_output[(s > thresh[0]) & (s <= thresh[1])] = 1
+
     return binary_output
 
-hls_binary = hls_select(image, thresh=(30, 100))
+hls_binary = hls_select(image, thresh=(120, 255))
 
 # Plot the result
 f, (ax1, ax2) = plt.subplots(1, 2, figsize=(24, 9))
@@ -31,3 +31,4 @@ ax1.set_title('Original Image', fontsize=50)
 ax2.imshow(hls_binary, cmap='gray')
 ax2.set_title('Thresholded S', fontsize=50)
 plt.subplots_adjust(left=0., right=1, top=0.9, bottom=0.)
+plt.show()
