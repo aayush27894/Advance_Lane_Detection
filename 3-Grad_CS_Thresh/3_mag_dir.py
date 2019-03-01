@@ -8,21 +8,31 @@ import pickle
 # Read in an image
 image = mpimg.imread('signs_vehicles_xygrad.png')
 
-# Define a function that applies Sobel x and y, 
+# Define a function that applies Sobel x and y,
 # then computes the magnitude of the gradient
 # and applies a threshold
 def mag_thresh(img, sobel_kernel=3, mag_thresh=(0, 255)):
-    
-    # Apply the following steps to img
-    # 1) Convert to grayscale
-    # 2) Take the gradient in x and y separately
-    # 3) Calculate the magnitude 
-    # 4) Scale to 8-bit (0 - 255) and convert to type = np.uint8
-    # 5) Create a binary mask where mag thresholds are met
-    # 6) Return this mask as your binary_output image
-    binary_output = np.copy(img) # Remove this line
+    # Converting to grayscale
+    gray = cv2.cvtColor(img, cv2.COLOR_RGB2GRAY)
+
+    # Taking the gradient in x and y separately
+    sobelx = cv2.Sobel(gray, cv2.CV_64F, 1, 0)
+    sobely = cv2.Sobel(gray, cv2.CV_64F, 0, 1)
+
+    # Calculate the magnitude
+    mag = np.power((np.power(sobelx, 2) + np.power(sobely, 2)), 0.5)
+
+    # Scaling to 8-bit (0 - 255) and convert to type = np.uint8
+    mag_scaled = np.uint8(255*mag/np.max(mag))
+
+    # Creating a binary mask where mag thresholds are met
+    binary_output = np.zeros_like(gray)
+
+    # Return this mask as your binary_output image
+    binary_output[(mag_scaled >= mag_thresh[0]) & (mag_scaled <= mag_thresh[1])] = 1
+
     return binary_output
-    
+
 # Run the function
 mag_binary = mag_thresh(image, sobel_kernel=3, mag_thresh=(30, 100))
 # Plot the result
@@ -33,3 +43,4 @@ ax1.set_title('Original Image', fontsize=50)
 ax2.imshow(mag_binary, cmap='gray')
 ax2.set_title('Thresholded Magnitude', fontsize=50)
 plt.subplots_adjust(left=0., right=1, top=0.9, bottom=0.)
+plt.show()

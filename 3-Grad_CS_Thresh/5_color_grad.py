@@ -4,18 +4,24 @@ import numpy as np
 import cv2
 
 # Read in an image, you can also try test1.jpg or test4.jpg
-image = mpimg.imread('test6.jpg') 
+image = mpimg.imread('test6.jpg')
 
 # Define a function that thresholds the S-channel of HLS
 # Use exclusive lower bound (>) and inclusive upper (<=)
 def hls_select(img, thresh=(0, 255)):
-    # 1) Convert to HLS color space
-    # 2) Apply a threshold to the S channel
-    # 3) Return a binary image of threshold result
-    binary_output = np.copy(img) # placeholder line
-    return binary_output
+    # Converting to HLS color space
+    hls = cv2.cvtColor(img, cv2.COLOR_RGB2HLS)
+
+    # Apply a threshold to the S channel
+    s = hls[:,:,2]
+
+    binary_output = np.zeros_like(s)
+
+    binary_output[(s > thresh[0]) & (s <= thresh[1])]
     
-hls_binary = hls_select(image, thresh=(0, 255))
+    return binary_output
+
+hls_binary = hls_select(image, thresh=(30, 100))
 
 # Plot the result
 f, (ax1, ax2) = plt.subplots(1, 2, figsize=(24, 9))

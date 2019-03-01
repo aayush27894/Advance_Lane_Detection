@@ -19,9 +19,9 @@ def abs_sobel_thresh(img, orient='x', thresh_min=20, thresh_max=100):
 
     # Take the derivative in x or y given orient = 'x' or 'y'
     if orient == 'x':
-        sobel = cv2.Sobel(gray, cv2.CV_64F, 1, 0)
+        sobel = cv2.Sobel(gray, cv2.CV_64F, 1, 0, ksize=3)
     else:
-        sobel = cv2.Sobel(gray, cv2.CV_64F, 0, 1)
+        sobel = cv2.Sobel(gray, cv2.CV_64F, 0, 1, ksize=3)
 
     # Take the absolute value of the derivative or gradient
     abs_sobel = np.abs(sobel)
