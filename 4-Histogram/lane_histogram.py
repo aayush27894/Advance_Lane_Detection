@@ -4,7 +4,7 @@ import matplotlib.pyplot as plt
 
 # Load our image
 # `mpimg.imread` will load .jpg as 0-255, so normalize back to 0-1
-img = mpimg.imread('warped-example.jpg')/255
+img = mpimg.imread('warped-example.jpg')
 
 def hist(img):
     # TO-DO: Grab only the bottom half of the image
