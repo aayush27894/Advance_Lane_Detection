@@ -27,7 +27,8 @@ def find_lane_pixels(binary_warped):
 
     # Set height of windows - based on nwindows above and image shape
     window_height = np.int(binary_warped.shape[0]//nwindows)
-    # Identify the x and y positions of all nonzero pixels in the image
+    # Identify the x and y positions of all nonzero pixels in the image]
+
     nonzero = binary_warped.nonzero()
     nonzeroy = np.array(nonzero[0])
     nonzerox = np.array(nonzero[1])
@@ -49,21 +50,21 @@ def find_lane_pixels(binary_warped):
         win_xleft_high = 0  # Update this
         win_xright_low = 0  # Update this
         win_xright_high = 0  # Update this
-        
+
         # Draw the windows on the visualization image
         cv2.rectangle(out_img,(win_xleft_low,win_y_low),
-        (win_xleft_high,win_y_high),(0,255,0), 2) 
+        (win_xleft_high,win_y_high),(0,255,0), 2)
         cv2.rectangle(out_img,(win_xright_low,win_y_low),
-        (win_xright_high,win_y_high),(0,255,0), 2) 
-        
+        (win_xright_high,win_y_high),(0,255,0), 2)
+
         ### TO-DO: Identify the nonzero pixels in x and y within the window ###
         good_left_inds = None
         good_right_inds = None
-        
+
         # Append these indices to the lists
         left_lane_inds.append(good_left_inds)
         right_lane_inds.append(good_right_inds)
-        
+
         ### TO-DO: If you found > minpix pixels, recenter next window ###
         ### (`right` or `leftx_current`) on their mean position ###
         pass # Remove this when you add your function
@@ -78,7 +79,7 @@ def find_lane_pixels(binary_warped):
 
     # Extract left and right line pixel positions
     leftx = nonzerox[left_lane_inds]
-    lefty = nonzeroy[left_lane_inds] 
+    lefty = nonzeroy[left_lane_inds]
     rightx = nonzerox[right_lane_inds]
     righty = nonzeroy[right_lane_inds]
 
