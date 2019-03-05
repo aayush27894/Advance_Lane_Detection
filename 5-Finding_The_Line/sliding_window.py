@@ -52,57 +52,26 @@ def find_lane_pixels(binary_warped):
         # Identify window boundaries in x and y (and right and left)
         win_y_low  = binary_warped.shape[0] - (window+1)*window_height
         win_y_high = binary_warped.shape[0] - window*window_height
-<<<<<<< HEAD
-        ### TO-DO: Find the four below boundaries of the window ###
-        win_xleft_low = 0  # Update this
-        win_xleft_high = 0  # Update this
-        win_xright_low = 0  # Update this
-        win_xright_high = 0  # Update this
-=======
         print(window)
         if window == 0:
             win_xleft_low   = leftx_current - margin
             win_xleft_high  = leftx_current + margin
             win_xright_low  = rightx_current - margin
             win_xright_high = rightx_current + margin
->>>>>>> e84627b63817e1bab1ec3c064b72c6bf3bf68bd4
 
         # Draw the windows on the visualization image
         cv2.rectangle(out_img,(win_xleft_low,win_y_low),
         (win_xleft_high,win_y_high),(0,255,0), 2)
         cv2.rectangle(out_img,(win_xright_low,win_y_low),
         (win_xright_high,win_y_high),(0,255,0), 2)
-<<<<<<< HEAD
-
-        ### TO-DO: Identify the nonzero pixels in x and y within the window ###
-        good_left_inds = None
-        good_right_inds = None
-
-        # Append these indices to the lists
-        left_lane_inds.append(good_left_inds)
-        right_lane_inds.append(good_right_inds)
-
-        ### TO-DO: If you found > minpix pixels, recenter next window ###
-        ### (`right` or `leftx_current`) on their mean position ###
-        pass # Remove this when you add your function
-=======
->>>>>>> e84627b63817e1bab1ec3c064b72c6bf3bf68bd4
 
 
-<<<<<<< HEAD
-    # Extract left and right line pixel positions
-    leftx = nonzerox[left_lane_inds]
-    lefty = nonzeroy[left_lane_inds]
-    rightx = nonzerox[right_lane_inds]
-    righty = nonzeroy[right_lane_inds]
-=======
         # ### TO-DO: Identify the nonzero pixels in x and y within the window ###
         # good_left_inds = binary_warped[win_y_low:win_y_high, win_xleft_low:win_xleft_high].nonzero()
         # print(win_y_low)
         # print(good_left_inds)
         # good_right_inds = binary_warped[win_y_low:win_y_high, win_xright_low:win_xright_high].nonzero()
         # print(good_right_inds)
->>>>>>> e84627b63817e1bab1ec3c064b72c6bf3bf68bd4
 
         high_left = binary_warped[win_y_low:win_y_high, win_xleft_low:win_xleft_high].nonzero()[0] + win_y_low
         high_right = binary_warped[win_y_low:win_y_high, win_xright_low:win_xright_high].nonzero()[0] + win_y_low
@@ -145,9 +114,6 @@ def find_lane_pixels(binary_warped):
         ### (`right` or `leftx_current`) on their mean position ###
 
 
-<<<<<<< HEAD
-plt.imshow(out_img)
-=======
     #
     # # Concatenate the arrays of indices (previously was a list of lists of pixels)
     # try:
@@ -205,4 +171,3 @@ plt.show()
 # out_img = fit_polynomial(binary_warped)
 #
 # plt.imshow(out_img)
->>>>>>> e84627b63817e1bab1ec3c064b72c6bf3bf68bd4
